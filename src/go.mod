@@ -1,4 +1,4 @@
-module github.com/Norrun/CLI-Habit-Thingemabob
+module github.com/Norrun/CLI-Habit-Thingemabob/src
 
 go 1.24.4
 

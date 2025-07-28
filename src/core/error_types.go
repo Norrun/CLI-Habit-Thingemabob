@@ -4,20 +4,29 @@ import (
 	"fmt"
 )
 
-type appError interface {
+type appErr interface {
 	Code() int
 	Error() string
+	Update(context string) appErr
 }
 
-type aError struct {
+type appError struct {
 	code  int
 	error string
 }
 
-func (a aError) Code() int {
+func (a appError) Code() int {
 	return a.code
 }
 
-func (a aError) Error() string {
+func (a appError) Error() string {
 	return fmt.Sprintf("Code %d: %s", a.code, a.Error)
+}
+
+func (a appError) Update(context string) appErr {
+	return appError{code: a.code, error: fmt.Sprintf("when: %s: %s", context, a.error)}
+}
+
+func MakeAppErr(code int, context string, err error) appError {
+	return appError{code: code, error: fmt.Sprintf("when: %s: %e", context, err)}
 }

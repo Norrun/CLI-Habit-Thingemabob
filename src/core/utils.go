@@ -1,6 +1,6 @@
 package core
 
-func Is(err any) bool {
+func Exists(err any) bool {
 	return err != nil
 }
 func Some[T comparable](data T) bool {
